@@ -65,7 +65,14 @@ const LoginScreen: React.FC = () => {
               />
             </div>
           </form>
-          <p></p>
+          <p
+            className="text-center mt-5 underline underline-offset-2 cursor-pointer"
+            onClick={() => {
+              navigate("/sign_up");
+            }}
+          >
+            Not a memeber? Sign up.
+          </p>
         </Card>
       </div>
     </div>

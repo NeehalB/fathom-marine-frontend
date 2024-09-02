@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Sidemenu from "../Sidemenu/Sidemenu";
+import Logout from "../Button/Logout";
 
 const MainLayout = () => {
   return (
@@ -8,7 +9,9 @@ const MainLayout = () => {
         <Sidemenu />
       </div>
       <div className="h-full flex-grow flex flex-col">
-        <div className="h-14 max-h-14 box-border"></div>
+        <div className="h-14 max-h-14 box-border flex justify-end items-center">
+          <Logout />
+        </div>
         <div className="flex-grow box-border p-4 bg-slate-200">
           <Outlet />
         </div>
