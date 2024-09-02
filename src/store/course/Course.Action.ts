@@ -5,9 +5,13 @@ import AxiosInstance from "../../config/AxiosInstance";
 
 export const getAllCourses = createAsyncThunk(
   "courseData",
-  async (_args, { rejectWithValue }) => {
+  async (searchData: { search?: string }, { rejectWithValue }) => {
     try {
-      const { data } = await AxiosInstance.get(`${BASE_API}${APIS.course}`);
+      const { data } = await AxiosInstance.get(
+        `${BASE_API}${APIS.course}${
+          searchData && searchData.search ? `?search=${searchData.search}` : ""
+        }`
+      );
 
       return data;
     } catch (error) {

@@ -5,4 +5,6 @@ export const APIS = {
   sign_up: "/user/add-user",
   mood: "/user/mood",
   course: "/course",
+  watched_video: "/user/watched",
+  user: "/user",
 };

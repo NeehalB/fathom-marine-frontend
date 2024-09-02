@@ -3,17 +3,24 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const DoughnutChart = () => {
-  const data = [
+interface IDougnutChartProps {
+  data: {
+    watchedVideo: number;
+    unwatchedVideo: number;
+  };
+}
+
+const DoughnutChart: React.FC<IDougnutChartProps> = ({ data }) => {
+  const chartData = [
     {
       label: "Remaining",
-      value: 55,
+      value: data.unwatchedVideo,
       color: "rgb(255 3 3)",
       cutout: "50%",
     },
     {
       label: "Completed",
-      value: 15,
+      value: data.watchedVideo,
       color: "rgb(57 183 5)",
       cutout: "50%",
     },
@@ -23,18 +30,18 @@ const DoughnutChart = () => {
     plugins: {
       responsive: true,
     },
-    cutout: data.map((item) => item.cutout),
+    cutout: chartData.map((item) => item.cutout),
   };
 
   const finalData = {
-    labels: data.map((item) => item.label),
+    labels: chartData.map((item) => item.label),
     datasets: [
       {
-        data: data.map((item) => Math.round(item.value)),
-        backgroundColor: data.map((item) => item.color),
-        borderColor: data.map((item) => item.color),
+        data: chartData.map((item) => Math.round(item.value)),
+        backgroundColor: chartData.map((item) => item.color),
+        borderColor: chartData.map((item) => item.color),
         borderWidth: 1,
-        dataVisibility: new Array(data.length).fill(true),
+        dataVisibility: new Array(chartData.length).fill(true),
       },
     ],
   };

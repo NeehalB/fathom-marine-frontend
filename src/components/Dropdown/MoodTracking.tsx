@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 interface IMoodTrackingProps {
   moodHandler: (mood: string) => void;
@@ -6,7 +6,10 @@ interface IMoodTrackingProps {
 }
 
 const MoodTracking: React.FC<IMoodTrackingProps> = ({ moodHandler, mood }) => {
+  const [currentMood, setCurrentMood] = useState<string>();
+
   const onChangeHandler = (mood: string) => {
+    setCurrentMood(mood);
     moodHandler(mood);
   };
 
@@ -21,7 +24,7 @@ const MoodTracking: React.FC<IMoodTrackingProps> = ({ moodHandler, mood }) => {
         onChange={(e) => {
           onChangeHandler(e.target.value);
         }}
-        value={mood}
+        value={currentMood || mood}
       >
         <option value="">Select your mood</option>
         <option value="happy">Happy 😊</option>

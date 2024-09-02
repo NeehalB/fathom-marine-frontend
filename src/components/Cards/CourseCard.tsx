@@ -4,13 +4,20 @@ interface ICourseCardProps {
   title: string;
   link: string;
   id: string;
+  handleWatchedVideo: (id: string) => void;
 }
 
-const CourseCard: React.FC<ICourseCardProps> = ({ title, link, id }) => {
+const CourseCard: React.FC<ICourseCardProps> = ({
+  title,
+  link,
+  id,
+  handleWatchedVideo,
+}) => {
   const navigate = useNavigate();
 
   const onClickHandler = () => {
     navigate("/player", { state: { title, link, id } });
+    handleWatchedVideo(id);
   };
 
   return (

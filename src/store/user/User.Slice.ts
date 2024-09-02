@@ -1,5 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, addUser, updateUserMood } from "./User.Actions";
+import {
+  login,
+  addUser,
+  updateUserMood,
+  updateWatchedVideo,
+  getDashboardData,
+} from "./User.Actions";
 
 export interface UserState {
   user: {
@@ -7,14 +13,30 @@ export interface UserState {
     message: string;
     data: any;
   };
+  dashboard: {
+    watchedVideo: number;
+    unwatchedVideo: number;
+    mood: string;
+  };
   isLoading: boolean;
+  isDashboardLoading: boolean;
   loginStatus: boolean;
 }
 
 const initialState: UserState = {
-  user: { token: "", message: "", data: {} },
+  user: {
+    token: "",
+    message: "",
+    data: {},
+  },
+  dashboard: {
+    watchedVideo: 0,
+    unwatchedVideo: 0,
+    mood: "",
+  },
   isLoading: false,
   loginStatus: false,
+  isDashboardLoading: false,
 };
 
 const UserSlice = createSlice({
@@ -53,6 +75,26 @@ const UserSlice = createSlice({
     });
     builder.addCase(updateUserMood.rejected, (state) => {
       state.isLoading = false;
+    });
+    builder.addCase(updateWatchedVideo.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(updateWatchedVideo.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    });
+    builder.addCase(updateWatchedVideo.rejected, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(getDashboardData.pending, (state) => {
+      state.isDashboardLoading = true;
+    });
+    builder.addCase(getDashboardData.fulfilled, (state, action) => {
+      state.isDashboardLoading = false;
+      state.dashboard = action.payload;
+    });
+    builder.addCase(getDashboardData.rejected, (state) => {
+      state.isDashboardLoading = false;
     });
   },
 });

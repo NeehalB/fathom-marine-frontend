@@ -82,3 +82,45 @@ export const updateUserMood = createAsyncThunk(
     }
   }
 );
+
+export const updateWatchedVideo = createAsyncThunk(
+  "UpdateWatchedVideo",
+  async (userData: { id: string }, { rejectWithValue }) => {
+    try {
+      const { data } = await AxiosInstance.put(
+        `${BASE_API}${APIS.watched_video}?id=${userData.id}`
+      );
+      return data;
+    } catch (error) {
+      let errorMessage;
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response ? error.response.data : error.message;
+      } else {
+        errorMessage = error instanceof Error ? error.message : String(error);
+      }
+
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const getDashboardData = createAsyncThunk(
+  "DashboardData",
+  async (_args, { rejectWithValue }) => {
+    try {
+      const { data } = await AxiosInstance.get(`${BASE_API}${APIS.user}`);
+      return data;
+    } catch (error) {
+      let errorMessage;
+
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response ? error.response.data : error.message;
+      } else {
+        errorMessage = error instanceof Error ? error.message : String(error);
+      }
+
+      return rejectWithValue(errorMessage);
+    }
+  }
+);
