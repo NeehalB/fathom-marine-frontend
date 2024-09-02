@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "neehal-8b7e0"
+  },
+  "targets": {
+    "neehal-8b7e0": {
+      "hosting": {
+        "site": [
+          "learning-management-platform-b8298"
+        ]
+      }
+    }
+  }
+}
